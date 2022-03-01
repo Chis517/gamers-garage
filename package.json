@@ -1,0 +1,20 @@
+{
+  "name": "gamers-garage",
+  "version": "1.0.0",
+  "description": "Our user friendly site that allows anyone to create an account, search and filter games and comment/rate them.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chis517/gamers-garage.git"
+  },
+  "author": "Chris, Erica, Jess & Brandon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chis517/gamers-garage/issues"
+  },
+  "homepage": "https://github.com/Chis517/gamers-garage#readme"
+}
