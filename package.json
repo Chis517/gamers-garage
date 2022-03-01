@@ -9,7 +9,6 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
@@ -23,17 +22,19 @@
     "url": "https://github.com/Chis517/gamers-garage/issues"
   },
   "homepage": "https://github.com/Chis517/gamers-garage#readme",
-
   "dependencies": {
-    "axios": "^0.19.2",
+    "@popperjs/core": "^2.11.2",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "concurrently": "^5.1.0",
+    "concurrently": "^7.0.0",
+    "core-js": "^3.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mdbreact": "^4.25.0",
+    "material-ui-pickers": "^2.2.4",
+    "mdbreact": "^5.2.0",
     "mongoose": "^5.8.11",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
@@ -44,8 +45,12 @@
     "react-player": "^1.14.2",
     "react-reactstrap-pagination": "^1.0.6",
     "react-router-dom": "^5.1.2",
-    "reactstrap": "^8.4.0",
-    "validator": "^12.2.0",
+    "validator": "^13.7.0",
     "video-react": "^0.14.1"
+  },
+  "devDependencies": {
+    "react": "^16.14.0",
+    "reactstrap": "^6.5.0",
+    "webpack": "^5.69.1"
   }
 }
