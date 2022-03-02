@@ -34,7 +34,7 @@
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "material-ui-pickers": "^2.2.4",
-    "mdbreact": "^5.2.0",
+    "mdbreact": "^4.6.1",
     "mongoose": "^5.8.11",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
