@@ -1,25 +1,35 @@
 const router = require("express").Router();
 const gamesController = require("../../controllers/gameController");
 
-router
-    .route("/")
-    .get(gamesController.findAll)
-    .post(gamesController.create);
+// Matches with "/api/games"
+router.route("/")
+  .get(gamesController.findAll)
+  .post(gamesController.create);
 
-router
-    .route("/login/:email")
-    .get(gamesController.findOne)
+  router
+  .route("/login/:email")
+  .get(gamesController.findOne)
 
-router
-    .route("/:id")
-    .get(gamesController.findbyId)
-    .put(gamesController.update)
-    .delete(gamesController.remove);
+  router
+  .route("/details")
+  .get(gamesController.getGamesDetails)
+  .post(gamesController.createDetails)
+  .delete(gamesController.removeGamesDetails);
+  
+  router
+  .route("/remove/details/:id/:username")
+  .delete(gamesController.removeGamesDetails);
 
-router
-    .route("details")
-    .get(gamesController.getGamesDetails)
+  router
+  .route("/details:id")
+  .get(gamesController.getGamesDetails)
+  .post(gamesController.createDetails)
+  .delete(gamesController.removeGamesDetails);
+  
 
-
-
-module.exports = router;
+// Matches with "/api/games/:id"
+  router  
+  .route("/:id")
+  .get(gamesController.findById)
+  .put(gamesController.update)
+  .delete(gamesController.remove);
