@@ -12,7 +12,6 @@ const gameSchema = new Schema({
     type: String,
     required: true,
   },
-  // saved book id from GoogleBooks
   gameId: {
     type: Number,
     required: true,
