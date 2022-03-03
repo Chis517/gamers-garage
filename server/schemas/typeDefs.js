@@ -32,7 +32,6 @@ type Query {
 }
 
 
-
   type Auth {
     token: ID!
     user: User
