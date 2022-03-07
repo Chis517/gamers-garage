@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Chis517/gamers-garage#readme",
   "dependencies": {
+    "@apollo/client": "^3.3.21",
     "@popperjs/core": "^2.11.2",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
@@ -33,6 +34,7 @@
     "express": "^4.17.1",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
     "material-ui-pickers": "^2.2.4",
     "mdbreact": "^4.6.1",
     "mongoose": "^5.8.11",
