@@ -37,7 +37,8 @@ if (process.env.NODE_ENV === 'production') {
 //   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 // });
 
-// app.use(routes);
+app.use(routes);
+app.use("/games", require("./routes/api/games"));
 
 db.once('open', () => {
   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
