@@ -10,7 +10,6 @@
     "start": "node server/server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
   },
   "repository": {
@@ -25,8 +24,5 @@
   "homepage": "https://github.com/Chis517/gamers-garage#readme",
   "devDependencies": {
     "concurrently": "^7.0.0"
-  },
-  "browser": {
-    "buffer": false
   }
 }

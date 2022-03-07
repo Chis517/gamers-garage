@@ -1,40 +1,51 @@
-import React,{Component} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-// import Signup from '../src/components/pages/Signup';
-// import LoginUser from '../src/components/pages/Login';
-// import Logout from '../src/components/pages/Logout';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+
+// import SearchGames from './pages/SearchGames';
+// import SavedGames from './pages/SavedGames';
 import Navbar from './components/Navbar';
-import Home from './components/pages/Home';
-import Genre from './components/pages/Genre';
-import Platforms from './components/pages/Platforms';
-import Games from './components/pages/Games';
-import Footer from './components/pages/Footer';
-import PlatformPage from './components/PlatformPage';
-import GameDetails from './components/pages/GameDetails';
-import Profile from './components/pages/Profile';
 
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
 
-class App extends Component {
-  render() {
-    return (
-        <Router>
-          <div>
-            <Navbar />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/genre" component={Genre} />
-            <Route exact path="/platforms" component={Platforms} />
-            <Route exact path="/games" component={Games} />
-            <Route path="/games/:pageid" component={Games} />
-            <Route path="/platformpage/:platform" component={PlatformPage} />
-            <Route path="/game/:name/:id" component={GameDetails} />
-            {/* <Route path="/register" component={Signup} />
-            <Route path="/login" component={LoginUser} />
-            <Route path="/logout" component={Logout} /> */}
-            <Route path="/profile" component={Profile} />
-            <Footer />
-          </div>
-        </Router>
-    );
-  }
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <Router>
+        <>
+          <Navbar />
+          <Switch>
+            {/* <Route exact path='/' component={SearchGames} /> */}
+            {/* <Route exact path='/saved' component={SavedGames} /> */}
+            <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+          </Switch>
+        </>
+      </Router>
+    </ApolloProvider>
+  );
 }
+
 export default App;
