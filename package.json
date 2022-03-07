@@ -2,15 +2,16 @@
   "name": "gamers-garage",
   "version": "1.0.0",
   "description": "Our user friendly site that allows anyone to create an account, search and filter games and comment/rate them.",
-  "main": "server.js",
+  "main": "server/server.js",
+  "engines": {
+    "node": "16.13.0"
+  },
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "node server.js",
-    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,41 +23,8 @@
     "url": "https://github.com/Chis517/gamers-garage/issues"
   },
   "homepage": "https://github.com/Chis517/gamers-garage#readme",
-  "dependencies": {
-    "@apollo/client": "^3.3.21",
-    "@popperjs/core": "^2.11.2",
-    "axios": "^0.21.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "buffer": "^6.0.3",
-    "concurrently": "^7.0.0",
-    "core-js": "^3.21.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "is-empty": "^1.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^3.1.2",
-    "material-ui-pickers": "^2.2.4",
-    "mdbreact": "^4.6.1",
-    "mongoose": "^5.8.11",
-    "nodemon": "^2.0.2",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "react-autosuggest": "^9.4.3",
-    "react-dom": "^16.12.0",
-    "react-html-parser": "^2.0.2",
-    "react-player": "^1.14.2",
-    "react-reactstrap-pagination": "^1.0.6",
-    "react-router-dom": "^5.1.2",
-    "validator": "^13.7.0",
-    "video-react": "^0.14.1"
-  },
   "devDependencies": {
-    "@types/jwt-decode": "^3.1.0",
-    "graphql": "^16.3.0",
-    "react": "^16.14.0",
-    "reactstrap": "^6.5.0",
-    "webpack": "^5.69.1"
+    "concurrently": "^7.0.0"
   },
   "browser": {
     "buffer": false
