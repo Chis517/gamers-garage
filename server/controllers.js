@@ -43,7 +43,7 @@ module.exports = {
     res.json({ token, user });
   },
   
-//save a game to gamer user profile
+// save a game to gamer user profile
 
 async saveGame({ user, body }, res) {
     console.log(user);

@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Signup from '../src/components/pages/Signup';
-import LoginUser from '../src/components/pages/Login';
-import Logout from '../src/components/pages/Logout';
+// import Signup from '../src/components/pages/Signup';
+// import LoginUser from '../src/components/pages/Login';
+// import Logout from '../src/components/pages/Logout';
 import Navbar from './components/Navbar';
 import Home from './components/pages/Home';
 import Genre from './components/pages/Genre';
@@ -27,9 +27,9 @@ class App extends Component {
             <Route path="/games/:pageid" component={Games} />
             <Route path="/platformpage/:platform" component={PlatformPage} />
             <Route path="/game/:name/:id" component={GameDetails} />
-            <Route path="/register" component={Signup} />
+            {/* <Route path="/register" component={Signup} />
             <Route path="/login" component={LoginUser} />
-            <Route path="/logout" component={Logout} />
+            <Route path="/logout" component={Logout} /> */}
             <Route path="/profile" component={Profile} />
             <Footer />
           </div>
