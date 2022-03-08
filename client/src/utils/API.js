@@ -21,7 +21,7 @@ export default {
             "headers": userHeader
         })
     },
-    getAllGames:function(page){
+    getAllGames: function(page){
         /*return axios({
             "method":"GET",
             "url":"https://rawg-video-games-database.p.rapidapi.com/games",

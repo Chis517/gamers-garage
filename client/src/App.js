@@ -8,7 +8,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-// import SearchGames from './pages/SearchGames';
+import SearchGames from './pages/SearchGames';
 // import SavedGames from './pages/SavedGames';
 import Navbar from './components/Navbar';
 
@@ -38,7 +38,7 @@ function App() {
         <>
           <Navbar />
           <Switch>
-            {/* <Route exact path='/' component={SearchGames} /> */}
+            <Route exact path='/' component={SearchGames} />
             {/* <Route exact path='/saved' component={SavedGames} /> */}
             <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
           </Switch>
