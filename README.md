@@ -24,35 +24,38 @@
  
 
   ## Installation
-  gh repo clone Chis517/gamers-garage.git
+    gh repo clone Chis517/gamers-garage.git
 
-* It is recommended that you delete the node modules to troubleshoot any errors, then npm install
+    * It is recommended that you delete the node modules to troubleshoot any errors, then npm install
 
   
  ## API
- [RAWG Video Games Application](https://rapidapi.com/accujazz/api/rawg-video-games-database)
+[RAWG Video Games Application](https://rapidapi.com/accujazz/api/rawg-video-games-database)
 
  ## Visuals
 
- ##
 
   ## License
   This project operates under the [MIT](https://choosealicense.com/licenses/MIT/) license.
 
   ## Technologies
 
- * HTML
- * CSS
- * Javascript
- * Bootstrap
- * React
- * Apollo
- * React Router DOM
- * Graphql
- * Bcrypt
- * cookie parser
- * dotenv
- * mysql2
+   * HTML
+   * CSS
+   * Javascript
+   * Bootstrap
+   * React
+   * Apollo
+   * Express
+   * React Router DOM
+   * Graphql
+   * Bcrypt
+   * cookie parser
+   * dotenv
+   * Mongoose
+   * MongoDB
+   * JWT
+  
 
 
 ## Future Development
@@ -60,8 +63,8 @@
 
 ## Contributors
 
-Brandon Conte, Jess Varghese, Christian Ouimet, Erica Misiorski
+    Brandon Conte, Jess Varghese, Christian Ouimet, Erica Misiorski
 
 ## Questions
-  If you have any questions about the repo, open and issue:
-  * Github: https://github.com/Chis517/gamers-garage
+    If you have any questions about the repo, open and issue:
+    * Github: https://github.com/Chis517/gamers-garage
