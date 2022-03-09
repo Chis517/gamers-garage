@@ -104,9 +104,9 @@ useEffect(() => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid className='text-light bg-info'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search your game!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -116,12 +116,12 @@ useEffect(() => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='game title here'
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
-                  Submit Search
+                <Button type='submit' variant='dark' size='lg'>
+                  Search
                 </Button>
               </Col>
             </Form.Row>

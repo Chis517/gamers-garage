@@ -56,6 +56,7 @@ const LoginForm = () => {
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'
+            size='lg'
             placeholder='Your email'
             name='email'
             onChange={handleInputChange}
@@ -80,7 +81,8 @@ const LoginForm = () => {
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          variant='dark'>
+          
           Submit
         </Button>
       </Form>
