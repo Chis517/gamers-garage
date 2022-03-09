@@ -7,9 +7,9 @@
   
   ## Description
     
-  Gamers Garage is an application for a user who is interested in browsing a database of video games they might be interested in playing and reviewing.
+  Gamers Garage is an application for the user who is interested in browsing a database of video games they might be interested in playing and reviewing.
 
-  When a user looks up a game, they will be presented with an image of the game, as well as, a rating.
+  When a user searches for a game, they will be presented with the title of the game, and image, and its rating. They also have the ability to save games to their profile.
 
 
 
