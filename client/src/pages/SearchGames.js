@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import axios from 'axios';
 
 import GameResults from './GameResults';
 import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import { SAVE_GAME } from '../utils/mutations';
-
 
 
 const SearchGames = () => {
