@@ -1,112 +1,115 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { getAllGames } from '../utils/API';
 import axios from 'axios';
 
 import Auth from '../utils/auth';
-// import { searchGoogleBooks } from '../utils/API';
-// import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-// import { SAVE_BOOK } from '../utils/mutations';
+import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
+import { SAVE_GAME } from '../utils/mutations';
 
-const SearchBooks = () => {
+const SearchGames = () => {
   // // create state for holding returned google api data
-  // const [searchedBooks, setSearchedBooks] = useState([]);
+  const [searchedGames, setSearchedGames] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
 
-  // create state to hold saved bookId values
-  // const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  // create state to hold saved gameId values
+  const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
 
-  // const [saveBook] = useMutation(SAVE_BOOK);
+  const [saveGame] = useMutation(SAVE_GAME);
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
-  // useEffect(() => {
-  //   return () => saveBookIds(savedBookIds);
-  // });
+  useEffect(() => {
+    return () => saveGameIds(savedGameIds);
+  });
 
-const [data, setData] = useState(null);
-const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 
 // API FETCH to GET GAMES
-useEffect(() => {
+const getGames = (searchInput) => {
   axios(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`)
     .then(response => {
-      setData(response.data)
       console.log(response);
     })
     .catch(error => {
       console.error("error fetching data: ", error);
       setError(error);
     })
-    .finally(() => {
-      setLoading(false);
-    })
-}, []);
+};
 
-  // create method to search for books and set state on form submit
+
+
+  // create method to search for games and set state on form submit
   const handleFormSubmit = async (event) => {
+    const getGames = (searchInput) => {
+      axios.get(`https://api.rawg.io/api/search?q=${searchInput}&key=${process.env.REACT_APP_API_KEY}`)
+      .then(response => {
+        setSearchInput(response.data)
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error("error fetching data: ", error);
+        setError(error);
+      })
+    }
     event.preventDefault();
 
     if (!searchInput) {
       return false;
     }
 
-    // try {
-    //   const response = await searchGoogleBooks(searchInput);
+    try {
+      const response = await getGames(searchInput);
 
-    //   if (!response.ok) {
-    //     throw new Error('something went wrong!');
-    //   }
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
 
-    //   const { items } = await response.json();
+      const { items } = await response.json();
 
-    //   const bookData = items.map((book) => ({
-    //     bookId: book.id,
-    //     authors: book.volumeInfo.authors || ['No author to display'],
-    //     title: book.volumeInfo.title,
-    //     description: book.volumeInfo.description,
-    //     link: book.volumeInfo.infoLink,
-    //     image: book.volumeInfo.imageLinks?.thumbnail || '',
-    //   }));
+      const gameData = items.map((game) => ({
+        id: game.results.id,
+        name: game.results.name,
+        rating: game.results.rating,
+        background_image: game.results.background_image,
+      }));
 
-    //   setSearchedBooks(bookData);
-    //   setSearchInput('');
-    // } catch (err) {
-    //   console.error(err);
-    // }
+      setSearchedGames(gameData);
+      setSearchInput('');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  // // create function to handle saving a book to our database
-  // const handleSaveBook = async (bookId) => {
-  //   // find the book in `searchedBooks` state by the matching id
-  //   const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+  // create function to handle saving a game to our database
+  const handleSaveGame = async (id) => {
+    // find the game in `searchedGames` state by the matching id
+    const gameToSave = searchedGames.find((game) => game.id === id);
 
-  //   // get token
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  //   if (!token) {
-  //     return false;
-  //   }
+    if (!token) {
+      return false;
+    }
 
-  //   try {
-  //     await saveBook({
-  //       variables: {book: bookToSave},
-  //     });
+    try {
+      await saveGame({
+        variables: {game: gameToSave},
+      });
 
-  //     setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+      setSavedGameIds([...savedGameIds, gameToSave.id]);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Search for Books!</h1>
+          <h1>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -116,7 +119,7 @@ useEffect(() => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
                   size='lg'
-                  placeholder='Search for a book'
+                  placeholder='Search for a game'
                 />
               </Col>
               <Col xs={12} md={4}>
@@ -129,31 +132,30 @@ useEffect(() => {
         </Container>
       </Jumbotron>
 
-      {/* <Container>
+      <Container>
         <h2>
-          {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : 'Search for a book to begin'}
+          {searchedGames.length
+            ? `Viewing ${searchedGames.length} results:`
+            : 'Search for a game to begin'}
         </h2>
         <CardColumns>
-          {searchedBooks.map((book) => {
+          {searchedGames.map((game) => {
             return (
-              <Card key={book.bookId} border='dark'>
-                {book.image ? (
-                  <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' />
+              <Card key={game.id} border='dark'>
+                {game.background_image ? (
+                  <Card.Img src={game.background_image} alt={`The cover for ${game.name}`} variant='top' />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Title>{game.name}</Card.Title>
+                  <p className='small'>Rating: {game.rating}</p>
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedBookIds?.some((savedBookId) => savedBookId === book.bookId)}
+                      disabled={savedGameIds?.some((savedGameId) => savedGameId === game.id)}
                       className='btn-block btn-info'
-                      onClick={() => handleSaveBook(book.bookId)}>
-                      {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
+                      onClick={() => handleSaveGame(game.id)}>
+                      {savedGameIds?.some((savedGameId) => savedGameId === game.id)
+                        ? 'This game has already been saved!'
+                        : 'Save this Game!'}
                     </Button>
                   )}
                 </Card.Body>
@@ -161,9 +163,9 @@ useEffect(() => {
             );
           })}
         </CardColumns>
-      </Container> */}
+      </Container>
     </>
   );
 };
 
-export default SearchBooks;
+export default SearchGames;

@@ -5,21 +5,11 @@ const gameSchema = new Schema({
     type: String,
     required: true,
   },
-  released: {
-    type: String,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  gameId: {
+  id: {
     type: Number,
     required: true,
   },
   background_image: {
-    type: String,
-  },
-  website: {
     type: String,
   },
   rating: {

@@ -8,11 +8,8 @@ export const GET_ME = gql`
       email
       savedGamess {
         name
-        released
-        description
-        gameId
+        id
         background_image
-        website
         rating
       }
     }
