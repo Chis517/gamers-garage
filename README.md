@@ -28,8 +28,6 @@
   ## Installation
     gh repo clone Chis517/gamers-garage.git
 
-    * It is recommended that you delete the node modules to troubleshoot any errors, then npm install
-
   
  ## API
 [RAWG Video Games Application](https://rapidapi.com/accujazz/api/rawg-video-games-database)
@@ -68,5 +66,5 @@
     Brandon Conte, Jess Varghese, Christian Ouimet, Erica Misiorski
 
 ## Questions
-    If you have any questions about the repo, open and issue:
+    If you have any questions about the repo, open an issue:
     * Github: https://github.com/Chis517/gamers-garage
