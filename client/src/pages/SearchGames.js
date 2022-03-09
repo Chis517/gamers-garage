@@ -3,20 +3,37 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 import { useMutation } from '@apollo/client';
 import axios from 'axios';
 
+import GameResults from './GameResults';
 import Auth from '../utils/auth';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import { SAVE_GAME } from '../utils/mutations';
 
+
+
 const SearchGames = () => {
-  // // create state for holding returned google api data
-  const [searchedGames, setSearchedGames] = useState([]);
-  // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState("")
+  const [gameResults, setGameResults] = useState([])
 
-  // create state to hold saved gameId values
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
-
   const [saveGame] = useMutation(SAVE_GAME);
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    let slug = searchTerm.split(' ').join('-').toLowerCase()
+
+    // API Fetch
+    setGameResults([])
+    fetch(`https://rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&search=${slug}`)
+    .then(resp => resp.json())
+    .then(({results}) => {
+      results === undefined ? alert('no games found') : setGameResults(results)
+    })
+    setSearchTerm("")
+  }
 
   // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -24,115 +41,44 @@ const SearchGames = () => {
     return () => saveGameIds(savedGameIds);
   });
 
-const [error, setError] = useState(null);
-
-// API FETCH to GET GAMES
-const getGames = (searchInput) => {
-  axios(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.error("error fetching data: ", error);
-      setError(error);
-    })
-};
-
-
-
-  // create method to search for games and set state on form submit
-  const handleFormSubmit = async (event) => {
-    const getGames = (searchInput) => {
-      axios.get(`https://api.rawg.io/api/search?q=${searchInput}&key=${process.env.REACT_APP_API_KEY}`)
-      .then(response => {
-        setSearchInput(response.data)
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error("error fetching data: ", error);
-        setError(error);
-      })
-    }
-    event.preventDefault();
-
-    if (!searchInput) {
-      return false;
-    }
-
-    try {
-      const response = await getGames(searchInput);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { items } = await response.json();
-
-      const gameData = items.map((game) => ({
-        id: game.results.id,
-        name: game.results.name,
-        rating: game.results.rating,
-        background_image: game.results.background_image,
-      }));
-
-      setSearchedGames(gameData);
-      setSearchInput('');
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   // create function to handle saving a game to our database
-  const handleSaveGame = async (id) => {
-    // find the game in `searchedGames` state by the matching id
-    const gameToSave = searchedGames.find((game) => game.id === id);
+  // const handleSaveGame = async (id) => {
+  //   // find the game in `searchedGames` state by the matching id
+  //   const gameToSave = searchedGames.find((game) => game.id === id);
 
-    // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //   // get token
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+  //   if (!token) {
+  //     return false;
+  //   }
 
-    try {
-      await saveGame({
-        variables: {game: gameToSave},
-      });
+  //   try {
+  //     await saveGame({
+  //       variables: {game: gameToSave},
+  //     });
 
-      setSavedGameIds([...savedGameIds, gameToSave.id]);
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  //     setSavedGameIds([...savedGameIds, gameToSave.id]);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
 
   return (
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
           <h1>Search for Games!</h1>
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name='searchInput'
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='Search for a game'
-                />
-              </Col>
-              <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
-                  Submit Search
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
+          <form onSubmit={onSubmit}>
+          <input type="text" value={searchTerm} onChange={handleChange}/>
+          <br></br>
+          <input type="submit"/>
+        </form>
+        <GameResults gameResults={gameResults} />
         </Container>
       </Jumbotron>
 
-      <Container>
+      {/* <Container>
         <h2>
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results:`
@@ -163,7 +109,7 @@ const getGames = (searchInput) => {
             );
           })}
         </CardColumns>
-      </Container>
+      </Container> */}
     </>
   );
 };
