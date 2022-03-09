@@ -107,7 +107,7 @@ const SearchGames = () => {
             );
           })}
         </CardColumns>
-      </Container> */}
+      // </Container> */}
     </>
   );
 };
