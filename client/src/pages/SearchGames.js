@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { useMutation } from '@apollo/client';
+// import { useMutation } from '@apollo/client';
 
 import GameResults from './GameResults';
-import Auth from '../utils/auth';
-import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
-import { SAVE_GAME } from '../utils/mutations';
+// import Auth from '../utils/auth';
+// import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
+// import { SAVE_GAME } from '../utils/mutations';
 
 
 const SearchGames = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [gameResults, setGameResults] = useState([])
 
-  const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
-  const [saveGame] = useMutation(SAVE_GAME);
+  // const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
+  // const [saveGame] = useMutation(SAVE_GAME);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value)
@@ -34,32 +34,32 @@ const SearchGames = () => {
   }
 
   // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
-  useEffect(() => {
-    return () => saveGameIds(savedGameIds);
-  });
+  // useEffect(() => {
+  //   return () => saveGameIds(savedGameIds);
+  // });
 
-  // create function to handle saving a game to our database
-  const handleSaveGame = async (id) => {
-    // find the game in `searchedGames` state by the matching id
-    const gameToSave = searchedGames.find((game) => game.id === id);
+  // // create function to handle saving a game to our database
+  // const handleSaveGame = async (id) => {
+  //   // find the game in `searchedGames` state by the matching id
+  //   const gameToSave = searchedGames.find((game) => game.id === id);
 
-    // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+  //   // get token
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+  //   if (!token) {
+  //     return false;
+  //   }
 
-    try {
-      await saveGame({
-        variables: {game: gameToSave},
-      });
+  //   try {
+  //     await saveGame({
+  //       variables: {game: gameToSave},
+  //     });
 
-      setSavedGameIds([...savedGameIds, gameToSave.id]);
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  //     setSavedGameIds([...savedGameIds, gameToSave.id]);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
 
   return (
     <>
