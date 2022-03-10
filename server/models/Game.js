@@ -6,7 +6,7 @@ const gameSchema = new Schema({
     required: true,
   },
   gameId: {
-    type: Number,
+    type: String,
     required: true,
   },
   background_image: {

@@ -35,7 +35,6 @@ class AuthService {
 
   logout() {
     // Clear user token and profile data from localStorage
-    // axios.defaults.headers.common["Authorization"] = null;
     localStorage.removeItem('id_token');
     // this will reload the page and reset the state of the application
     window.location.assign('/');
