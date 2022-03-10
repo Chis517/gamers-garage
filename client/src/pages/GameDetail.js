@@ -1,11 +1,13 @@
 import React from 'react';
+import { Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 const GameDetail = (props) => {
 
   const { game } = props.location.gameProps
 
   return (
-    <div>
+    <>
+    <Container>
       <h1>{game.name}</h1>
       <p>Released: {game.released}</p>
       <p>Rating: {game.rating}</p>
@@ -24,7 +26,8 @@ const GameDetail = (props) => {
           game.short_screenshots.map(ss => <li><img src={ss.image} alt='screenshot'></img></li>)
         }
       </ul>
-    </div>
+      </Container>
+    </>
   );
 }
 

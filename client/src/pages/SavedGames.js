@@ -53,7 +53,12 @@ const SavedGames = () => {
         <CardColumns>
           {userData.savedGames.map((game) => {
             return (
-              <Card key={game.gameId} border='dark'>
+              <Card 
+              className="text-center" 
+              key={game.gameId} 
+              bg='white'
+              style={{ width: '50rem' }}
+              border='dark'>
                 {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{game.title}</Card.Title>

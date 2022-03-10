@@ -63,7 +63,7 @@ const SearchGames = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-info'>
+      <Jumbotron className='text-light bg-info'>
         <Container>
           <h1>Search for Games!</h1>
           <form onSubmit={onSubmit}>
