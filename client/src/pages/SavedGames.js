@@ -53,13 +53,18 @@ const SavedBooks = () => {
         <CardColumns>
           {userData.savedGames.map((book) => {
             return (
-              <Card key={game.gameId} border='dark'>
+              <Card 
+              className="text-center" 
+              key={game.gameId} 
+              bg='white'
+              style={{ width: '50rem' }}
+              border='dark'>
                 {game.image ? <Card.Img src={game.image} alt={`The cover for ${game.title}`} variant='top' /> : null}
                 <Card.Body>
                   <Card.Title>{game.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
+                  <Button variant="outline-danger" size="lg" onClick={() => handleDeleteBook(book.bookId)}>
                     Delete this Book!
                   </Button>
                 </Card.Body>
