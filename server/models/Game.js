@@ -5,15 +5,12 @@ const gameSchema = new Schema({
     type: String,
     required: true,
   },
-  id: {
+  gameId: {
     type: Number,
     required: true,
   },
   background_image: {
     type: String,
-  },
-  rating: {
-    type: Number,
   }
 });
 

@@ -14,16 +14,14 @@ const typeDefs = gql`
 
   type Game {
     name: String
-    id: ID!
+    gameId: ID!
     background_image: String
-    rating: Int
   }
 
   input savedGamesInput {
     name: String
-    id: ID!
+    gameId: ID!
     background_image: String
-    rating: Int
   }
 
   type Auth {
