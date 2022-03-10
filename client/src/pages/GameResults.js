@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 const Results = (props) => {
 
   return (
-    <div className="results-container">
+    <>
+    <Container>
       <ul>
       {
         props.gameResults.map(game => (
@@ -24,8 +26,10 @@ const Results = (props) => {
         ))
       }
       </ul>
-    </div>
+    </Container>
+    </>
   );
 }
 
 export default Results;
+
