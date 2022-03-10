@@ -19,6 +19,7 @@ export const ADD_USER = gql`
       user {
         _id
         username
+        email
       }
     }
   }
@@ -31,9 +32,8 @@ export const SAVE_GAME = gql`
       email
       savedGames {
         name
-        id
+        gameId
         background_image
-        rating
       }
     }
   }
@@ -47,9 +47,8 @@ export const REMOVE_GAME = gql`
       email
       savedGames {
         name
-        id
+        gameId
         background_image
-        rating
       }
       gameCount
     }
