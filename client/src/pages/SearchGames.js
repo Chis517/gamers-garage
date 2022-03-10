@@ -34,33 +34,32 @@ const SearchGames = () => {
   }
 
   // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveGameIds(savedGameIds);
   });
 
   // create function to handle saving a game to our database
-  // const handleSaveGame = async (id) => {
-  //   // find the game in `searchedGames` state by the matching id
-  //   const gameToSave = searchedGames.find((game) => game.id === id);
+  const handleSaveGame = async (id) => {
+    // find the game in `searchedGames` state by the matching id
+    const gameToSave = searchedGames.find((game) => game.id === id);
 
-  //   // get token
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  //   if (!token) {
-  //     return false;
-  //   }
+    if (!token) {
+      return false;
+    }
 
-  //   try {
-  //     await saveGame({
-  //       variables: {game: gameToSave},
-  //     });
+    try {
+      await saveGame({
+        variables: {game: gameToSave},
+      });
 
-  //     setSavedGameIds([...savedGameIds, gameToSave.id]);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
+      setSavedGameIds([...savedGameIds, gameToSave.id]);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <>
